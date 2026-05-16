@@ -38,6 +38,7 @@ export default defineConfig([
     '.next/**',
     '.open-next/**',
     'coverage/**',
+    'dist/**',
     'out/**',
     'build/**',
     'next-env.d.ts',
