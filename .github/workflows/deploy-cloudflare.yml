@@ -64,7 +64,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: 4.91.0
+          wranglerVersion: 4.92.0
           command: deploy
           preCommands: pnpm run build
 
@@ -74,6 +74,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: 4.91.0
+          wranglerVersion: 4.92.0
           command: deploy --env preview
           preCommands: pnpm run build
