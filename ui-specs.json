@@ -1,0 +1,537 @@
+{
+  "product": "Lumina",
+  "scope": "Compact daisyUI-based app shell spec. Main content is mock-only; focus is shell, navigation, compact topbar, component consistency, tokens, states, and implementation classes.",
+  "framework": {
+    "uiLibrary": "daisyUI",
+    "base": "Tailwind CSS",
+    "guidingPrinciples": [
+      "Prefer daisyUI semantic classes over one-off Tailwind color utilities.",
+      "Use daisyUI component size modifiers such as btn-sm, input-sm, menu-sm, and card-compact before custom sizing.",
+      "Keep app-shell density consistent by aligning nav rows, search, icon buttons, avatars, and cards to one compact rhythm.",
+      "Use custom theme variables for brand expression instead of hardcoded component overrides."
+    ],
+    "primaryDaisyComponents": [
+      "drawer",
+      "navbar",
+      "menu",
+      "input",
+      "btn",
+      "avatar",
+      "dropdown",
+      "card",
+      "badge",
+      "indicator",
+      "divider",
+      "tooltip"
+    ]
+  },
+  "daisyTheme": {
+    "name": "lumina",
+    "strategy": "Map Lumina brand colors into daisyUI semantic theme tokens.",
+    "tokens": {
+      "primary": "#3A5A6B",
+      "primary-content": "#FFFFFF",
+      "secondary": "#5B7583",
+      "secondary-content": "#FFFFFF",
+      "accent": "#7F9BAB",
+      "accent-content": "#102A35",
+      "neutral": "#1F2328",
+      "neutral-content": "#FFFFFF",
+      "base-100": "#FFFFFF",
+      "base-200": "#F7F8FB",
+      "base-300": "#E6E8EB",
+      "base-content": "#1F2328",
+      "info": "#3A5A6B",
+      "info-content": "#FFFFFF",
+      "success": "#4F7D66",
+      "success-content": "#FFFFFF",
+      "warning": "#B9843B",
+      "warning-content": "#1F2328",
+      "error": "#B65A5A",
+      "error-content": "#FFFFFF"
+    },
+    "cssVariables": {
+      "--radius-selector": "0.625rem",
+      "--radius-field": "0.625rem",
+      "--radius-box": "0.875rem",
+      "--size-selector": "0.21875rem",
+      "--size-field": "0.21875rem",
+      "--border": "1px",
+      "--depth": "0",
+      "--noise": "0"
+    },
+    "tailwindConfigExample": {
+      "daisyui": {
+        "themes": [
+          {
+            "lumina": {
+              "primary": "#3A5A6B",
+              "primary-content": "#FFFFFF",
+              "secondary": "#5B7583",
+              "secondary-content": "#FFFFFF",
+              "accent": "#7F9BAB",
+              "accent-content": "#102A35",
+              "neutral": "#1F2328",
+              "neutral-content": "#FFFFFF",
+              "base-100": "#FFFFFF",
+              "base-200": "#F7F8FB",
+              "base-300": "#E6E8EB",
+              "base-content": "#1F2328",
+              "info": "#3A5A6B",
+              "success": "#4F7D66",
+              "warning": "#B9843B",
+              "error": "#B65A5A",
+              "--radius-selector": "0.625rem",
+              "--radius-field": "0.625rem",
+              "--radius-box": "0.875rem",
+              "--size-selector": "0.21875rem",
+              "--size-field": "0.21875rem",
+              "--border": "1px",
+              "--depth": "0",
+              "--noise": "0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "densitySystem": {
+    "mode": "compact",
+    "baseUnit": 4,
+    "coreRule": "Use daisyUI small variants first, then use minimal Tailwind spacing utilities for layout only.",
+    "spacingScale": {
+      "xs": "0.25rem",
+      "sm": "0.5rem",
+      "md": "0.75rem",
+      "lg": "1rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem"
+    },
+    "componentHeights": {
+      "desktopTopbar": "3.5rem",
+      "desktopSidebarWidth": "17rem",
+      "desktopSidebarItem": "2.25rem",
+      "desktopSidebarItemWithCover": "2.5rem",
+      "searchInput": "2rem using input input-sm",
+      "iconButton": "2rem using btn btn-sm btn-square btn-ghost",
+      "avatar": "2rem",
+      "mobileHeader": "4rem",
+      "mobileBottomNav": "4rem",
+      "mobileTabItem": "3.25rem"
+    },
+    "consistencyRules": [
+      "All desktop nav rows use h-9 or h-10.",
+      "All topbar controls use h-8.",
+      "All icon-only controls use btn-sm btn-square.",
+      "All compact menus use menu-sm.",
+      "All cards in shell-adjacent areas use card-compact.",
+      "Avoid mixing p-5, p-6, gap-6, or h-14 in the shell."
+    ]
+  },
+  "typography": {
+    "fontFamilies": {
+      "display": "Georgia, 'Times New Roman', serif",
+      "body": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    },
+    "daisyUsage": {
+      "brand": "font-serif font-bold tracking-tight text-primary",
+      "navLabel": "text-sm font-medium",
+      "navActive": "text-sm font-semibold text-primary",
+      "sectionLabel": "text-[0.6875rem] uppercase tracking-[0.1em] text-base-content/55 font-bold",
+      "body": "text-sm text-base-content/75",
+      "caption": "text-xs text-base-content/55"
+    },
+    "sizes": {
+      "desktopBrand": {
+        "className": "text-2xl leading-8"
+      },
+      "mobileBrand": {
+        "className": "text-3xl leading-9"
+      },
+      "sectionTitle": {
+        "className": "text-2xl leading-8 font-serif font-bold"
+      },
+      "nav": {
+        "className": "text-sm leading-5"
+      },
+      "caption": {
+        "className": "text-xs leading-4"
+      }
+    }
+  },
+  "appShell": {
+    "desktop": {
+      "layout": {
+        "componentPattern": "drawer lg:drawer-open",
+        "rootClass": "drawer lg:drawer-open bg-base-100 text-base-content",
+        "drawerContentClass": "drawer-content min-h-screen bg-base-100 lg:pl-0",
+        "drawerSideClass": "drawer-side z-40",
+        "sidebarWidthClass": "w-68",
+        "mainContentClass": "min-h-screen bg-base-100"
+      },
+      "regions": {
+        "sidebar": {
+          "width": "17rem",
+          "className": "min-h-full w-68 border-r border-base-300 bg-base-200",
+          "paddingClass": "p-3",
+          "sectionsGapClass": "space-y-3"
+        },
+        "topbar": {
+          "height": "3.5rem",
+          "className": "navbar min-h-14 h-14 border-b border-base-300 bg-base-100 px-3",
+          "structure": [
+            "navbar-start: optional mobile drawer trigger and desktop page context",
+            "navbar-center: compact search",
+            "navbar-end: notifications, profile dropdown"
+          ]
+        },
+        "content": {
+          "className": "bg-base-100",
+          "note": "Main content can be mocked. Shell spacing should not depend on content."
+        }
+      }
+    },
+    "mobile": {
+      "layout": {
+        "rootClass": "min-h-screen bg-base-100 text-base-content pb-16",
+        "headerClass": "navbar min-h-16 h-16 border-b border-base-300 bg-base-100 px-3",
+        "bottomNavClass": "dock dock-sm border-t border-base-300 bg-base-100",
+        "bodyClass": "px-4 pb-20"
+      },
+      "regions": {
+        "topbar": {
+          "height": "4rem",
+          "behavior": "Use the same daisyUI navbar pattern as desktop, not a separate oversized hero header."
+        },
+        "bottomNav": {
+          "height": "4rem",
+          "component": "dock",
+          "items": [
+            "Home",
+            "Search",
+            "Explore",
+            "Library",
+            "Profile"
+          ]
+        }
+      }
+    }
+  },
+  "components": {
+    "DesktopSidebar": {
+      "daisyComponents": [
+        "menu",
+        "divider",
+        "avatar",
+        "badge"
+      ],
+      "className": "flex min-h-full w-68 flex-col gap-3 border-r border-base-300 bg-base-200 p-3",
+      "brand": {
+        "className": "flex h-10 items-center gap-2 px-2",
+        "iconClass": "text-primary size-5",
+        "labelClass": "font-serif text-2xl font-bold tracking-tight text-base-content"
+      },
+      "menu": {
+        "className": "menu menu-sm gap-1 p-0 text-base-content",
+        "sectionClass": "space-y-1",
+        "sectionTitleClass": "menu-title px-2 py-1 text-[0.6875rem] uppercase tracking-[0.1em] text-base-content/55",
+        "itemClass": "rounded-field",
+        "activeItemClass": "active bg-primary/10 text-primary font-semibold",
+        "iconClass": "size-4.5 shrink-0",
+        "rowHeight": "2.25rem",
+        "bookRowHeight": "2.5rem"
+      },
+      "bookItem": {
+        "className": "grid grid-cols-[1.75rem_1fr] items-center gap-2 rounded-field px-2 py-1.5",
+        "coverClass": "h-8 w-6 rounded-sm object-cover",
+        "labelClass": "truncate text-sm"
+      },
+      "footer": {
+        "className": "mt-auto border-t border-base-300 pt-3",
+        "linksClass": "flex flex-wrap gap-x-3 gap-y-1 px-2 text-xs text-base-content/60",
+        "copyrightClass": "px-2 pt-2 text-xs text-base-content/45"
+      },
+      "states": {
+        "default": "hover:bg-base-300/70",
+        "active": "bg-primary/10 text-primary",
+        "focus": "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+        "disabled": "disabled:opacity-45 disabled:pointer-events-none"
+      }
+    },
+    "CompactTopbar": {
+      "daisyComponent": "navbar",
+      "intent": "More compact than the previous top nav while preserving daisyUI structure.",
+      "className": "navbar min-h-14 h-14 border-b border-base-300 bg-base-100 px-3",
+      "slots": {
+        "navbarStart": {
+          "className": "navbar-start gap-1",
+          "desktopContent": "Optional route title or collapsed drawer button.",
+          "mobileContent": "Drawer trigger plus compact Lumina brand.",
+          "menuButtonClass": "btn btn-sm btn-square btn-ghost lg:hidden",
+          "brandClass": "btn btn-sm btn-ghost px-2 font-serif text-xl font-bold text-primary normal-case"
+        },
+        "navbarCenter": {
+          "className": "navbar-center hidden flex-1 md:flex",
+          "searchWrapperClass": "relative w-full max-w-xl",
+          "searchInputClass": "input input-sm input-bordered w-full rounded-field pl-8 text-sm",
+          "searchIconClass": "pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-base-content/50"
+        },
+        "navbarEnd": {
+          "className": "navbar-end gap-1",
+          "notificationButtonClass": "btn btn-sm btn-square btn-ghost",
+          "profileButtonClass": "btn btn-sm btn-circle btn-ghost avatar",
+          "avatarImageClass": "w-8 rounded-full",
+          "dropdownMenuClass": "menu menu-sm dropdown-content z-50 mt-2 w-48 rounded-box bg-base-100 p-2 shadow border border-base-300"
+        }
+      },
+      "mobileSearch": {
+        "behavior": "Search is a bottom-tab destination by default. Do not place a full search input in the mobile topbar unless the user is on the Search route.",
+        "routeSearchClass": "input input-sm input-bordered w-full rounded-field"
+      },
+      "states": {
+        "sticky": "sticky top-0 z-30",
+        "scrolled": "border-base-300 shadow-sm",
+        "focus": "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      }
+    },
+    "BottomNavigation": {
+      "preferredDaisyComponent": "dock",
+      "fallbackDaisyPattern": "btm-nav if dock is unavailable in the installed daisyUI version",
+      "className": "dock dock-sm z-40 border-t border-base-300 bg-base-100 lg:hidden",
+      "itemClass": "text-base-content/65",
+      "activeItemClass": "dock-active text-primary",
+      "iconClass": "size-5",
+      "labelClass": "text-xs",
+      "items": [
+        {
+          "id": "home",
+          "label": "Home",
+          "icon": "home",
+          "state": "active"
+        },
+        {
+          "id": "search",
+          "label": "Search",
+          "icon": "search",
+          "state": "default"
+        },
+        {
+          "id": "explore",
+          "label": "Explore",
+          "icon": "compass",
+          "state": "default"
+        },
+        {
+          "id": "library",
+          "label": "Library",
+          "icon": "bookmark",
+          "state": "default"
+        },
+        {
+          "id": "profile",
+          "label": "Profile",
+          "icon": "user",
+          "state": "default"
+        }
+      ]
+    },
+    "SearchInput": {
+      "daisyComponent": "input",
+      "desktopClass": "input input-sm input-bordered w-full rounded-field pl-8",
+      "mobileClass": "input input-sm input-bordered w-full rounded-field",
+      "placeholder": "Search books, authors, or genres...",
+      "states": {
+        "default": "border-base-300 bg-base-100",
+        "hover": "hover:border-base-content/25",
+        "focus": "focus:outline-primary",
+        "disabled": "input-disabled"
+      },
+      "guideline": "Use input-sm instead of custom height. Use pl-8 only when a search icon is present."
+    },
+    "IconButton": {
+      "daisyComponent": "button",
+      "className": "btn btn-sm btn-square btn-ghost",
+      "states": {
+        "default": "text-base-content/70",
+        "hover": "hover:bg-base-200 hover:text-primary",
+        "active": "bg-primary/10 text-primary",
+        "focus": "focus-visible:outline-primary"
+      }
+    },
+    "AvatarDropdown": {
+      "daisyComponents": [
+        "dropdown",
+        "avatar",
+        "menu"
+      ],
+      "wrapperClass": "dropdown dropdown-end",
+      "triggerClass": "btn btn-sm btn-circle btn-ghost avatar",
+      "avatarClass": "w-8 rounded-full ring-1 ring-base-300",
+      "menuClass": "menu menu-sm dropdown-content z-50 mt-2 w-48 rounded-box border border-base-300 bg-base-100 p-2 shadow",
+      "menuItems": [
+        "Profile",
+        "Settings",
+        "Log out"
+      ]
+    },
+    "NotificationButton": {
+      "daisyComponents": [
+        "indicator",
+        "badge",
+        "button"
+      ],
+      "className": "btn btn-sm btn-square btn-ghost",
+      "indicatorClass": "indicator",
+      "badgeClass": "badge badge-xs badge-primary indicator-item",
+      "iconClass": "size-5"
+    },
+    "ShellCard": {
+      "daisyComponent": "card",
+      "className": "card card-compact rounded-box border border-base-300 bg-base-100 shadow-none",
+      "bodyClass": "card-body p-4",
+      "denseBodyClass": "card-body p-3",
+      "guideline": "Use only for shell-adjacent panels such as dropdown previews, mini lists, and account panels. Main content may define its own card rhythm later."
+    },
+    "PrimaryAction": {
+      "daisyComponent": "button",
+      "className": "btn btn-sm btn-primary",
+      "blockClass": "btn btn-sm btn-primary btn-block",
+      "guideline": "Use btn-sm for shell actions. Reserve default btn size for main content actions."
+    }
+  },
+  "routesAndResponsiveBehavior": {
+    "desktop": {
+      "sidebar": "Always visible at lg and above using drawer lg:drawer-open.",
+      "topbar": "Always compact h-14. Search is centered and capped at max-w-xl.",
+      "content": "Begins directly below topbar. Avoid extra shell padding unless content needs it."
+    },
+    "tablet": {
+      "sidebar": "Use drawer overlay by default.",
+      "topbar": "Same h-14 compact navbar with drawer trigger.",
+      "search": "Show search input if width allows; otherwise show search icon route."
+    },
+    "mobile": {
+      "sidebar": "Hidden behind drawer or replaced by bottom dock.",
+      "topbar": "Compact h-16 navbar with brand, notification, profile.",
+      "bottomNav": "Use dock/dock-sm fixed bottom.",
+      "search": "Search as tab route, not permanent topbar field."
+    }
+  },
+  "stateModel": {
+    "navigationItem": {
+      "default": "text-base-content/75 hover:bg-base-300/60",
+      "hover": "hover:text-primary",
+      "active": "active bg-primary/10 text-primary font-semibold",
+      "focusVisible": "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+      "disabled": "opacity-45 pointer-events-none"
+    },
+    "topbar": {
+      "default": "bg-base-100 border-base-300",
+      "scrolled": "shadow-sm",
+      "transparent": "not recommended for Lumina app shell because compact shell needs clear structure"
+    },
+    "drawer": {
+      "closedMobile": "drawer-side hidden by checkbox state",
+      "openMobile": "drawer-side visible with overlay",
+      "openDesktop": "lg:drawer-open"
+    },
+    "dropdown": {
+      "closed": "No dropdown-content visible.",
+      "open": "dropdown-content menu menu-sm rounded-box bg-base-100 shadow border border-base-300"
+    },
+    "loading": {
+      "shell": "Render navbar, sidebar, and bottom dock immediately.",
+      "content": "Use skeleton only inside main content, not in shell chrome."
+    },
+    "offline": {
+      "desktop": "Small badge badge-outline badge-sm near footer.",
+      "mobile": "Toast above dock using alert alert-info alert-soft if needed."
+    }
+  },
+  "accessibility": {
+    "landmarks": {
+      "sidebar": "nav aria-label='Primary navigation'",
+      "topbar": "header",
+      "content": "main",
+      "bottomNav": "nav aria-label='Mobile primary navigation'"
+    },
+    "aria": {
+      "activePage": "Use aria-current='page' on active menu and dock items.",
+      "iconOnlyButtons": "Every btn-square or btn-circle needs aria-label.",
+      "dropdownTrigger": "Use aria-haspopup='menu' and aria-expanded when controlled.",
+      "drawerToggle": "Use a labelled checkbox/button pattern compatible with daisyUI drawer."
+    },
+    "keyboard": {
+      "searchShortcut": "Slash key focuses desktop search.",
+      "escape": "Closes dropdown, drawer, or search suggestions.",
+      "tabOrderDesktop": [
+        "drawer/sidebar navigation",
+        "topbar search",
+        "topbar actions",
+        "main content"
+      ],
+      "tabOrderMobile": [
+        "topbar drawer trigger",
+        "topbar brand/actions",
+        "main content",
+        "bottom dock"
+      ]
+    },
+    "contrast": {
+      "rule": "Functional text should use base-content/70 or stronger. Avoid base-content/40 for nav labels.",
+      "primaryAction": "Use btn-primary so text uses primary-content."
+    }
+  },
+  "implementationSkeleton": {
+    "desktopAndMobileShell": {
+      "htmlClassPattern": "data-theme='lumina'",
+      "root": "drawer lg:drawer-open bg-base-100 text-base-content",
+      "drawerInput": "input id='lumina-drawer' type='checkbox' class='drawer-toggle'",
+      "content": "drawer-content min-h-screen",
+      "sidebar": "drawer-side z-40",
+      "overlay": "drawer-overlay lg:hidden",
+      "navbar": "navbar sticky top-0 z-30 min-h-14 h-14 border-b border-base-300 bg-base-100 px-3",
+      "main": "min-h-[calc(100vh-3.5rem)] bg-base-100",
+      "mobileDock": "dock dock-sm border-t border-base-300 bg-base-100 lg:hidden"
+    },
+    "topbarExampleClasses": {
+      "navbar": "navbar min-h-14 h-14 border-b border-base-300 bg-base-100 px-3",
+      "start": "navbar-start gap-1",
+      "drawerButton": "btn btn-sm btn-square btn-ghost lg:hidden",
+      "brand": "btn btn-sm btn-ghost px-2 font-serif text-xl font-bold normal-case text-primary",
+      "center": "navbar-center hidden flex-1 md:flex",
+      "searchWrapper": "relative w-full max-w-xl",
+      "searchInput": "input input-sm input-bordered w-full rounded-field pl-8",
+      "end": "navbar-end gap-1",
+      "notification": "btn btn-sm btn-square btn-ghost",
+      "avatarTrigger": "btn btn-sm btn-circle btn-ghost avatar",
+      "avatarImage": "w-8 rounded-full",
+      "dropdownMenu": "menu menu-sm dropdown-content z-50 mt-2 w-48 rounded-box border border-base-300 bg-base-100 p-2 shadow"
+    },
+    "sidebarExampleClasses": {
+      "aside": "min-h-full w-68 border-r border-base-300 bg-base-200 p-3",
+      "brand": "flex h-10 items-center gap-2 px-2",
+      "menu": "menu menu-sm gap-1 p-0",
+      "sectionTitle": "menu-title px-2 py-1 text-[0.6875rem] uppercase tracking-[0.1em] text-base-content/55",
+      "activeItem": "active bg-primary/10 text-primary font-semibold",
+      "divider": "my-2 h-px bg-base-300"
+    }
+  },
+  "doAndDont": {
+    "do": [
+      "Use navbar min-h-14 h-14 for desktop top nav.",
+      "Use input-sm and btn-sm in the shell.",
+      "Use menu menu-sm for sidebar and dropdown menus.",
+      "Use semantic classes: bg-base-100, bg-base-200, border-base-300, text-primary, btn-primary.",
+      "Keep avatar at w-8 in the topbar.",
+      "Use card-compact for dropdown and shell cards."
+    ],
+    "dont": [
+      "Do not use h-20, p-6, gap-6, or large search fields in the app shell.",
+      "Do not override every daisyUI component height manually.",
+      "Do not hardcode bg-[#3A5A6B] where btn-primary or text-primary works.",
+      "Do not create separate sizing systems for sidebar, topbar, and bottom nav.",
+      "Do not place full-width mobile search in the topbar unless the current route is Search."
+    ]
+  }
+}
