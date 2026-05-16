@@ -1,0 +1,87 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "books",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-04-21",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "books.quanghuy.dev",
+      "custom_domain": true
+    }
+  ],
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "books"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "NEXT_INC_CACHE_R2_BUCKET",
+      "bucket_name": "books-incremental-cache"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "NEXT_CACHE_DO_QUEUE",
+        "class_name": "DOQueueHandler"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "DOQueueHandler"
+      ]
+    }
+  ],
+  "env": {
+    "preview": {
+      "name": "books-preview",
+      "workers_dev": true,
+      "preview_urls": true,
+      "routes": [
+        {
+          "pattern": "books-preview.quanghuy.dev",
+          "custom_domain": true
+        }
+      ],
+      "services": [
+        {
+          "binding": "WORKER_SELF_REFERENCE",
+          "service": "books-preview"
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "NEXT_INC_CACHE_R2_BUCKET",
+          "bucket_name": "books-incremental-cache"
+        }
+      ],
+      "durable_objects": {
+        "bindings": [
+          {
+            "name": "NEXT_CACHE_DO_QUEUE",
+            "class_name": "DOQueueHandler"
+          }
+        ]
+      }
+    }
+  }
+}

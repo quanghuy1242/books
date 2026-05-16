@@ -1,0 +1,40 @@
+{
+  "name": "books",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . && tsc --noEmit",
+    "test": "vitest run",
+    "test:ci": "cross-env NODE_ENV=test vitest run",
+    "test:watch": "vitest",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+  },
+  "dependencies": {
+    "@opennextjs/cloudflare": "^1.19.10",
+    "next": "16.2.6",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.6",
+    "jsdom": "^29.0.2",
+    "typescript": "6.0.3",
+    "vitest": "^4.1.5",
+    "wrangler": "^4.91.0"
+  }
+}
